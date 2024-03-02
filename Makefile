@@ -18,6 +18,13 @@ help:
 	@echo 'Usage:'
 	@sed -n 's/^##//p' ${MAKEFILE_LIST} | column -t -s ':' |  sed -e 's/^/ /'
 
+## help: print this tag help
+.PHONY: help/tag
+help/tag:
+	@echo 'Usage:'
+	@echo 'make tag/order tag=v1.0.2'
+
+
 .PHONY: about
 about: ## Display info related to the build
 	@echo "OS: ${OS}"
@@ -69,22 +76,23 @@ generate: clean
 
 # ==================================================================================== #
 # GIT TAGS
+# Usage:  make tag/order tag=v1.0.2
 # ==================================================================================== #
 ## tag/order: Create git tag for order service
 .PHONY: tag/order
 tag/order:
-	git tag -fa golang/order/v1.0.1 -m "golang/order/v1.0.1"
-	git push origin refs/tags/golang/order/v1.0.1
+	git tag -fa golang/order/${tag} -m "golang/order/${tag}"
+	git push origin refs/tags/golang/order/${tag}
 
 ## tag/payment: Create git tag for payment service
 .PHONY: tag/payment
 tag/payment:
-	git tag -fa golang/payment/v1.0.1 -m "golang/payment/v1.0.1"
-	git push origin refs/tags/golang/payment/v1.0.1
+	git tag -fa golang/payment/${tag} -m "golang/payment/${tag}"
+	git push origin refs/tags/golang/payment/${tag}
 
 ## tag/shipping: Create git tag for shipping service
 .PHONY: tag/shipping
 tag/shipping:
-	git tag -fa golang/shipping/v1.0.1 -m "golang/shipping/v1.0.1"
-	git push origin refs/tags/golang/shipping/v1.0.1
+	git tag -fa golang/shipping/${tag} -m "golang/shipping/${tag}"
+	git push origin refs/tags/golang/shipping/${tag}
 
